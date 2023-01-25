@@ -1,6 +1,6 @@
 # macscripts
 
-Scripts to enhance MacOS. Basically autoupdates homebrew and checks from macos updates every 30 min (typically at login).
+Scripts to enhance MacOS. It autoupdates homebrew and checks from macos updates (updater.sh) and also provides easy to remember aliases to check for updates and upgrade macos.
 
 ## Install
 
