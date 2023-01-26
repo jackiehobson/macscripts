@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # ~/.zmisc holds my scripts and misc files
 
 mkdir ~/.zmisc
