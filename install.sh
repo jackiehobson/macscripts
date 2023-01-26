@@ -20,3 +20,17 @@ echo "alias update='softwareupdate -l'" >> ~/.zprofile
 echo "alias upgrade='sudo softwareupdate -iar --agree-to-license'" >> ~/.zprofile
 echo "ICLOUD=~/Library/Mobile\ Documents/com\~apple\~CloudDocs" >> ~/.zprofile
 echo "~/.zmisc/updater.sh" >> ~/.zprofile
+
+ICLOUD=~/Library/Mobile\ Documents/com\~apple\~CloudDocs
+
+
+
+# makes symlinks of .ssh, .gnupg, .config from iCloud storage
+# but backs them up first
+
+mkdir ~/.dotfiles.old
+mv ~/.ssh ~/.config ~/.gnupg ~/.dotfiles.old
+
+ln -s $ICLOUD/.ssh ~/
+ln -s $ICLOUD/.config ~/
+ln -s $ICLOUD/.gnupg ~/
