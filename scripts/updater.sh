@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# make it so ctrl-c exits the program and resets the update timer
+
+stty -echoctl
+trap ctrl_c INT
+function ctrl_c() {
+	touch ~/.zmisc/lastupdated.dat
+	echo
+	echo "Exiting updates..."
+	echo
+	exit 0
+}
+
 # check of this file's last modification is older than 30 minutes
 
 if test "`find ~/.zmisc/lastupdated.dat -mmin +30`"; then
