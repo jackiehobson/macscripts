@@ -31,6 +31,6 @@ ICLOUD=~/Library/Mobile\ Documents/com\~apple\~CloudDocs
 mkdir ~/.dotfiles.old
 mv ~/.ssh ~/.config ~/.gnupg ~/.dotfiles.old
 
-ln -s $ICLOUD/.ssh ~/
-ln -s $ICLOUD/.config ~/
-ln -s $ICLOUD/.gnupg ~/
+ln -s $ICLOUD/dotfiles/ssh ~/.ssh
+ln -s $ICLOUD/dotfiles/config ~/.config
+ln -s $ICLOUD/dotfiles/gnupg ~/.gnupg
