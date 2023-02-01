@@ -22,4 +22,4 @@ After configurating, run `install.sh` from the git directory.
 
 ## Devs
 
-Pull requests welcome, *.dat gitignored. Bash is used only just cause I'm more familiar with it than zsh. Plus syntax won't change at all since bash is frozen in MacOS due to licensing issues (see anti-tivolization).
+Pull requests welcome, `*.dat` gitignored. Bash is used only just cause I'm more familiar with it than zsh. Plus syntax won't change at all since bash is frozen in MacOS due to licensing issues (see anti-tivolization).
