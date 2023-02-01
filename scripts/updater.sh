@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # make it so ctrl-c exits the program and resets the update timer
 
 stty -echoctl
@@ -44,6 +45,7 @@ if test "`find ~/.zmisc/lastupdated.dat -mmin +30`"; then
 
 	brew update -v 
 	brew upgrade -v
+	echo
 	softwareupdate -l
 
 	# touch the file so the next time the script is run the last update is logged
