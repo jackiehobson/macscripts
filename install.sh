@@ -59,8 +59,11 @@ if test -f ./ICLOUD.dat; then
 
 	echo "Copying .ssh, .gnupg, and .config to ~/.dotfiles.old..."
 	mkdir ~/.dotfiles.old
+	mkdir $ICLOUD/dotfiles
+	cp ~/.ssh $ICLOUD/dotfiles/ssh
+	cp ~/.gnupg $ICLOUD/dotfiles/gnupg
+	cp ~/.config $ICLOUD/dotfiles/gnupg
 	mv ~/.ssh ~/.config ~/.gnupg ~/.dotfiles.old
-
 	echo "Making symlinks of .ssh, .gnupg and .config to icloud..."
 	ln -s $ICLOUD/dotfiles/ssh ~/.ssh
 	ln -s $ICLOUD/dotfiles/config ~/.config
