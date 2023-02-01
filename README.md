@@ -4,7 +4,7 @@ Scripts to enhance MacOS. It autoupdates homebrew and checks for macos updates (
 
 ## Dependencies
 
-Stock MacOS (as of Ventura) includes the required dependencies which are zsh and bash. 
+Stock MacOS (as of 13.x) includes the required dependencies which are zsh and bash. 
 
 ## Install
 
