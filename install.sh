@@ -36,21 +36,19 @@ echo 'PATH=$PATH":~/.zmisc"' >> ~/.zprofile
 echo "alias update='softwareupdate -l'" >> ~/.zprofile
 echo "alias upgrade='sudo softwareupdate -iar --agree-to-license'" >> ~/.zprofile
 
-# adds iCloud directory variable 
+# adds iCloud directory variable
 
 echo "ICLOUD=~/Library/Mobile\ Documents/com\~apple\~CloudDocs" >> ~/.zprofile
 
-# if homebrew support is enabled then add homebrew supported script 
+# if homebrew support is enabled then add homebrew supported script
 
 if test -f ./BREW.dat; then
 	echo "~/.zmisc/updater.sh" >> ~/.zprofile
 else
-	echo ~/.zmisc/updater_nh.sh" >> ~/.zprofile
+	echo "~/.zmisc/updater_nh.sh" >> ~/.zprofile
 fi
 
 ICLOUD=~/Library/Mobile\ Documents/com\~apple\~CloudDocs
-
-
 
 # makes symlinks of .ssh, .gnupg, .config from iCloud storage
 # but backs them up first and only if DOTFILES.dat exists in the repo
@@ -64,7 +62,7 @@ if test -f ./ICLOUD.dat; then
 	cp ~/.gnupg $ICLOUD/dotfiles/gnupg
 	cp ~/.config $ICLOUD/dotfiles/gnupg
 	mv ~/.ssh ~/.config ~/.gnupg ~/.dotfiles.old
-	echo "Making symlinks of .ssh, .gnupg and .config to icloud..."
+	echo "Making symlinks of .ssh, .gnupg and .config to iCloud..."
 	ln -s $ICLOUD/dotfiles/ssh ~/.ssh
 	ln -s $ICLOUD/dotfiles/config ~/.config
 	ln -s $ICLOUD/dotfiles/gnupg ~/.gnupg

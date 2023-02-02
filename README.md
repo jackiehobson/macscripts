@@ -1,14 +1,14 @@
 # macscripts
 
-Scripts to enhance MacOS. It autoupdates homebrew and checks for macos updates (updater.sh) and also provides easy to remember aliases to check for updates and upgrade macos. Adds symlinks from iCloud storage to local storage for ease of use. 
+Scripts to enhance MacOS. It checks for MacOS updates (updater.sh),optionally autoupdates homebrew and also provides easy to remember aliases to check for updates and upgrade MacOS. Optionally adds symlinks from iCloud storage to local storage for ease of use. 
 
 ## Dependencies
 
-Stock MacOS (as of 13.x) includes the required dependencies which are zsh and bash. 
+Stock MacOS (version >=10.15) includes the required dependencies which are zsh and bash. 
 
 ## Install
 
-### First, there are a few options you should consider.
+First, there are a few options you should consider.
 
 #### 1. Backing up .ssh, .gnupg, and .config to iCloud
 
@@ -22,4 +22,4 @@ After configurating, run `install.sh` from the git directory.
 
 ## Devs
 
-Pull requests welcome, `*.dat` gitignored. Bash is used only just cause I'm more familiar with it than zsh. Plus syntax won't change at all since bash is frozen in MacOS due to licensing issues (see anti-tivolization).
+Pull requests welcom. Bash is used only just cause I'm more familiar with it than zsh. Plus syntax won't change at all since bash is frozen in MacOS due to licensing issues.
