@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#    updater_nh.sh - checks for mac updates
+#    updater.sh - updates homebrew + packages and checks for mac updates
 #    Copyright (C) 2023 Jackie Hobson
 
 #    This program is free software: you can redistribute it and/or modify
@@ -17,34 +17,36 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 # make it so ctrl-c exits the program and resets the update timer
+LOCKFILE=~/.zmisc/updatelock.dat
+touch $LOCKFILE
+
 
 stty -echoctl
 trap ctrl_c INT
+
 function ctrl_c() {
 	touch ~/.zmisc/lastupdated.dat
+    echo "0" > $LOCKFILE
 	echo
 	echo "Exiting updates..."
 	echo
 	exit 0
 }
 
-# check of this file's last modification is older than 30 minutes
-
-if test "`find ~/.zmisc/lastupdated.dat -mmin +30`"; then
-
-	# check if there's internet
+function inet() {
+    # check if there's internet
 	touch ~/.zmisc/checkinternet.dat
 
 	while true; do
 
-		# check if we can ping 9.9.9.9, if so continue the script	
+		# check if we can ping 9.9.9.9, if so continue the script
 
 		if $( (( $(ping -c 1 9.9.9.9 > /dev/null ; echo $?) < 1 )) ); then
 			break
 		fi
 
 		# otherwise, if we can't ping 9.9.9.9 then try for 5 minutes then quit
-	
+
 		if test "`find ~/.zmisc/checkinternet.dat -mmin +5`"; then
 			echo "No internet in the past 5 minutes."
 			exit 1
@@ -56,9 +58,33 @@ if test "`find ~/.zmisc/lastupdated.dat -mmin +30`"; then
 
 	rm ~/.zmisc/checkinternet.dat
 
-	# check for a macos software update
+}
+
+# check if updates are running already
+
+if grep -q 1 "$LOCKFILE"; then
+  exit 0
+fi
+
+# check if this file's last modification is older than 30 minutes
+
+if test "`find ~/.zmisc/lastupdated.dat -mmin +30`"; then
+
+    # lock updates to eliminate simultaneous updates
+
+    echo "1" > $LOCKFILE
+
+    # check for internet
+
+    inet
+
+	# update homebrew and check for a macos software update
 
 	softwareupdate -l
+
+    # remove the update lock
+
+    echo "0" > $LOCKFILE
 
 	# touch the file so the next time the script is run the last update is logged
 

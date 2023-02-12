@@ -24,7 +24,7 @@ mkdir ~/.zmisc
 # installs files
 
 cp ./scripts/* ~/.zmisc/
-touch ~/.zmisc/lastupdated.dat
+touch –t 8804152240 ~/.zmisc/lastupdated.dat
 
 # installs ~/.zmisc to $PATH and sets the updater script to run
 # and adds the macos software update/upgrade aliases
