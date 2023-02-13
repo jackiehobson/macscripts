@@ -19,6 +19,8 @@
 # make it so ctrl-c exits the program and resets the update timer
 LOCKFILE=~/.zmisc/updatelock.dat
 touch $LOCKFILE
+RED='\033[0;31m'
+NOCOLOR='\033[0m'
 
 
 stty -echoctl
@@ -28,7 +30,7 @@ function ctrl_c() {
 	touch ~/.zmisc/lastupdated.dat
     echo "0" > $LOCKFILE
 	echo
-	echo "Exiting updates..."
+	echo -e "${RED}[!]${NOCOLOR} Exiting updates..."
 	echo
 	exit 0
 }
@@ -63,7 +65,10 @@ function inet() {
 # check if updates are running already
 
 if grep -q 1 "$LOCKFILE"; then
-  exit 0
+
+    echo -e "${RED}[!]${NOCOLOR} Updates running already, exiting..."
+
+    exit 0
 fi
 
 # check if this file's last modification is older than 30 minutes
