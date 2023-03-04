@@ -17,13 +17,24 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+function ynprompt {
+    while true; do
+        read -p "$* [y/n]: " yn
+        case $yn in
+            [Yy]*) return 0 ;;
+            [Nn]*) echo "Aborted" ; return  1 ;;
+        esac
+    done
+}
+
+
 # ~/.zmisc holds my scripts and misc files
 
 mkdir ~/.zmisc
 
 # installs files
 
-cp ./scripts/* ~/.zmisc/
+cp ./updater.sh ~/.zmisc/
 touch –t 8804152240 ~/.zmisc/lastupdated.dat
 
 # installs ~/.zmisc to $PATH and sets the updater script to run
@@ -40,20 +51,26 @@ echo "alias upgrade='sudo softwareupdate -iar --agree-to-license'" >> ~/.zprofil
 
 echo "ICLOUD=~/Library/Mobile\ Documents/com\~apple\~CloudDocs" >> ~/.zprofile
 
-# if homebrew support is enabled then add homebrew supported script
-
-if test -f ./BREW.dat; then
-	echo "~/.zmisc/updater.sh" >> ~/.zprofile
-else
-	echo "~/.zmisc/updater_nh.sh" >> ~/.zprofile
-fi
-
 ICLOUD=~/Library/Mobile\ Documents/com\~apple\~CloudDocs
 
-# makes symlinks of .ssh, .gnupg, .config from iCloud storage
-# but backs them up first and only if DOTFILES.dat exists in the repo
+# Install update support
 
-if test -f ./ICLOUD.dat; then
+if ynprompt "Enable homebrew updates?"; then
+    echo "1" > ~/.zmisc/brew.dat
+fi
+
+if ynprompt "Enable pip updates?"; then
+    echo "1" > ~/.zmisc/pip.dat
+fi
+
+if ynprompt "Enable macos updates?"; then
+    echo "1" > ~/.zmisc/mac.dat
+fi
+
+# makes symlinks of .ssh, .gnupg, .config from iCloud storage
+# # but backs them up first and only if DOTFILES.dat exists in the repo
+
+if ynprompt "Enable iCloud for .ssh, .gnupg, & .config?"; then
 
 	echo "Copying .ssh, .gnupg, and .config to ~/.dotfiles.old..."
 	mkdir ~/.dotfiles.old

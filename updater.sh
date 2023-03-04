@@ -69,6 +69,31 @@ function inet() {
 
 }
 
+function pipup() {
+    if grep -q 1 ~/.zmisc/pip.dat; then
+        pip --disable-pip-version-check list --outdated --format=json | python3 -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))" | xargs -n1 pip install --upgrade
+    else
+        echo -e "${RED}[!]${NOCOLOR} Not updating pip..."
+    fi
+}
+
+function brewup() {
+    if grep -q 1 ~/.zmisc/brew.dat; then
+        brew update -v
+        brew upgrade -v
+    else
+        echo -e "${RED}[!]${NOCOLOR} Not updating homebrew..."
+    fi
+}
+
+function macup() {
+    if grep -q 1 ~/.zmisc/mac.dat; then
+        softwareupdate -l
+    else
+        echo -e "${RED}[!]${NOCOLOR} Not updating macos..."
+    fi
+}
+
 # Check if updates are running already
 
 if grep -q 1 "$LOCKFILE"; then
@@ -86,13 +111,15 @@ if test "`find ~/.zmisc/lastupdated.dat -mmin +30`"; then
 
     echo "1" > $LOCKFILE
 
-    # Check for internet
+    # Check for internet and update
 
     inet
 
-	# Check for a MacOS software update
+    brewup
 
-	softwareupdate -l
+    pipup
+
+    macup
 
     # Remove the update lock
 
